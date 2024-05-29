@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
 {
-    private CharacterManager _instance;
-    public CharacterManager Instance
+    private static CharacterManager _instance;
+    public static CharacterManager Instance
     {
         get
         {
