@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -63,5 +64,17 @@ public class PlayerController : MonoBehaviour
 
         // 수평 회전 조절
         transform.eulerAngles += new Vector3(0, mouseDelta.x * lookSensitivity, 0);    // y축을 기준으로 좌우 회전
+    }
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            curMovementInput = context.ReadValue<Vector2>();
+        }
+        else if (context.phase == InputActionPhase.Canceled)
+        {
+            curMovementInput = Vector2.zero;
+        }
     }
 }
