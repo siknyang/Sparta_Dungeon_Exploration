@@ -77,4 +77,9 @@ public class PlayerController : MonoBehaviour
             curMovementInput = Vector2.zero;
         }
     }
+
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        mouseDelta = context.ReadValue<Vector2>();
+    }
 }
