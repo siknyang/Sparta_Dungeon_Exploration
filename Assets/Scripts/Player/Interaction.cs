@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Interaction : MonoBehaviour
 {
@@ -53,5 +54,17 @@ public class Interaction : MonoBehaviour
     {
         promptText.gameObject.SetActive(true);
         promptText.text = curInteractable.GetInteractPrompt();
+    }
+
+    public void OnInteractInput(InputAction.CallbackContext context)    // E 키 눌렀을 때
+    {
+        if (context.phase == InputActionPhase.Started && curInteractable != null)   // 키 눌렸고 오브젝트가 있을 때
+        {
+            Debug.Log("아이템 저장");
+            curInteractable.OnInteract();   // 오브젝트 정보 저장
+            curInteractGameObject = null;   // 정보 없앰
+            curInteractable = null;
+            promptText.gameObject.SetActive(false); // 창 닫기
+        }
     }
 }

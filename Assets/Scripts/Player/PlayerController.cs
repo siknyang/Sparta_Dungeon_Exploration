@@ -110,4 +110,21 @@ public class PlayerController : MonoBehaviour
         }
         return false;
     }
+
+    public void OnInventory(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            inventory?.Invoke();
+            ToggleCursor();
+        }
+    }
+
+    void ToggleCursor()    // 커서 표시 온오프
+    {
+        bool toggle = Cursor.lockState == CursorLockMode.Locked;    // 커서 표시 켜져있음 = 가운데 고정: 인벤토리 창 꺼져있고, 마우스 움직임에 따라 화면이 움직임
+        Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;    // 표시가 켜져있다면 꺼주고, 꺼져있다면 켜줌
+        canLook = !toggle;    // 화면이 움직일 수 있는 건 마우스 커서 표시가 꺼졌을 때
+                              // 인벤토리 창이 켜지면 마우스 커서 표시 꺼지고, 인벤토리 창이 꺼지면 마우스 커서 표시 켜짐
+    }
 }
