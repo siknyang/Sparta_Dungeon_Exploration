@@ -11,24 +11,6 @@ public class Passive : MonoBehaviour
     public Image uiBar;
     public Image uiBG;
 
-    private void Start()
-    {
-        remainTime = buffTime;
-    }
-
-    private void Update()
-    {
-        uiBar.fillAmount = GetPercentage();
-    }
-
-    private float GetPercentage()
-    {
-        return remainTime / buffTime;
-    }
-
-    public void AddBuff(float value)
-    {
-        remainTime += value;
-        // UI도 업데이트 되어야 함
-    }
+    // TODO :: 동일한 패시브 아이템 사용했을 때 시간 증가 안 되는 버그 수정
+    // 20이 증가된 상태로 20초가 아니라, 20이 두 번 증가해서 40 증가함
 }

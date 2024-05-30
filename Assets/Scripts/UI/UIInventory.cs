@@ -30,6 +30,7 @@ public class UIInventory : MonoBehaviour
     ItemData selectedItem;
     int selectedItemIndex = 0;
 
+    // TODO :: 아이템 줍기 전에 인벤토리 열면 유니티 에디터에서 보이는 모습인 버그 수정
     void Start()    // 초기화되고 창 닫힘
     {
         controller = CharacterManager.Instance.Player.controller;
@@ -92,6 +93,7 @@ public class UIInventory : MonoBehaviour
     {
         ItemData data = CharacterManager.Instance.Player.itemData;    // 플레이어가 파밍한 아이템 정보
 
+        // TODO :: 아이템 중첩이 안 되는 버그 수정
         // 슬롯에 이미 아이템이 있을 때 
         if (data.canStack)    // 아이템이 중복 가능하다면
         {

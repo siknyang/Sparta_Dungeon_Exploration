@@ -11,37 +11,12 @@ public class PlayerPassive : MonoBehaviour
     private Passive speedUp { get {  return uiPassive.speedUp; } }
     private Passive jumpUp { get { return uiPassive.jumpUp; } }
 
-    //private void Update()
-    //{
-    //    if (speedUp.remainTime > 0f)
-    //    {
-    //        uiPassive.speedUp.uiBar.gameObject.SetActive(true);
-            
-
-    //        if (speedUp.remainTime == 0f)
-    //        {
-    //            uiPassive.speedUp.uiBar.gameObject.SetActive(false);
-    //        }
-    //    }
-
-    //    if (jumpUp.remainTime > 0f)
-    //    {
-    //        uiPassive.jumpUp.uiBar.gameObject.SetActive(true);
-    //        jumpUp.remainTime -= Time.deltaTime;
-
-    //        if (jumpUp.remainTime == 0f)
-    //        {
-    //            uiPassive.jumpUp.uiBar.gameObject.SetActive(false);
-    //        }
-    //    }
-    //}
-
-    public void SpeedUpBuff(float time, float buffSpeed)
+    public void SpeedUpBuff(float time, float buffSpeed)    // 이동 속도 증가
     {
-        //speedUp.AddBuff(value);
         StartCoroutine(ApplySpeedBuff(time, buffSpeed));
     }
 
+    // TODO :: 리팩토링
     private IEnumerator ApplySpeedBuff(float time, float buffSpeed)
     {
         float curSpeed = CharacterManager.Instance.Player.controller.moveSpeed;
@@ -59,9 +34,8 @@ public class PlayerPassive : MonoBehaviour
         uiPassive.speedUp.uiBG.gameObject.SetActive(false);
     }
 
-    public void JumpUpBuff(float time, float buffPower)
+    public void JumpUpBuff(float time, float buffPower)     // 점프 높이 증가
     {
-        //jumpUp.AddBuff(value);
         StartCoroutine(ApplyJumpUpBuff(time, buffPower));
     }
 
