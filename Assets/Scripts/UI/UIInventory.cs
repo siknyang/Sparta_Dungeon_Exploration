@@ -24,6 +24,8 @@ public class UIInventory : MonoBehaviour
 
     private PlayerController controller;
     private PlayerCondition condition;
+    private PlayerPassive passive;
+    
 
     ItemData selectedItem;
     int selectedItemIndex = 0;
@@ -32,6 +34,7 @@ public class UIInventory : MonoBehaviour
     {
         controller = CharacterManager.Instance.Player.controller;
         condition = CharacterManager.Instance.Player.condition;
+        passive = CharacterManager.Instance.Player.passive;
         dropPosition = CharacterManager.Instance.Player.dropPosition;
 
         controller.inventory += Toggle; // inventory 델리게이트에 Toggle 메서드 구독
@@ -202,6 +205,12 @@ public class UIInventory : MonoBehaviour
                         break;
                     case ConsumableType.Hunger:
                         condition.Eat(selectedItem.consumables[i].value);
+                        break;
+                    case ConsumableType.SpeedUp:
+                        passive.SpeedUpBuff(passive.uiPassive.speedUp.buffTime, selectedItem.consumables[i].value);
+                        break;
+                    case ConsumableType.JumpUp:
+                        passive.JumpUpBuff(passive.uiPassive.jumpUp.buffTime, selectedItem.consumables[i].value);
                         break;
                 }
             }

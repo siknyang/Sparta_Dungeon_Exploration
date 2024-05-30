@@ -7,13 +7,12 @@ using UnityEngine.UI;
 public class Passive : MonoBehaviour
 {
     public float remainTime;
-    public float maxTime;
     public float buffTime;
     public Image uiBar;
 
     private void Start()
     {
-        remainTime = maxTime;
+        remainTime = buffTime;
     }
 
     private void Update()
@@ -23,11 +22,12 @@ public class Passive : MonoBehaviour
 
     private float GetPercentage()
     {
-        return remainTime / maxTime;
+        return remainTime / buffTime;
     }
 
     public void AddBuff(float value)
     {
         remainTime += value;
+        // UI도 업데이트 되어야 함
     }
 }

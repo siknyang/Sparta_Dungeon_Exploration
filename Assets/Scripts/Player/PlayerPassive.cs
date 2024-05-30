@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,34 +6,79 @@ using UnityEngine;
 public class PlayerPassive : MonoBehaviour
 {
     public UIPassive uiPassive;
+    public Player player;
 
     private Passive speedUp { get {  return uiPassive.speedUp; } }
     private Passive jumpUp { get { return uiPassive.jumpUp; } }
 
-    private void Update()
+    //private void Update()
+    //{
+    //    if (speedUp.remainTime > 0f)
+    //    {
+    //        uiPassive.speedUp.uiBar.gameObject.SetActive(true);
+            
+
+    //        if (speedUp.remainTime == 0f)
+    //        {
+    //            uiPassive.speedUp.uiBar.gameObject.SetActive(false);
+    //        }
+    //    }
+
+    //    if (jumpUp.remainTime > 0f)
+    //    {
+    //        uiPassive.jumpUp.uiBar.gameObject.SetActive(true);
+    //        jumpUp.remainTime -= Time.deltaTime;
+
+    //        if (jumpUp.remainTime == 0f)
+    //        {
+    //            uiPassive.jumpUp.uiBar.gameObject.SetActive(false);
+    //        }
+    //    }
+    //}
+
+    public void SpeedUpBuff(float time, float buffSpeed)
     {
-        if (speedUp.remainTime > 0f)
+        //speedUp.AddBuff(value);
+        StartCoroutine(ApplySpeedBuff(time, buffSpeed));
+    }
+
+    private IEnumerator ApplySpeedBuff(float time, float buffSpeed)
+    {
+        float curSpeed = CharacterManager.Instance.Player.controller.moveSpeed;
+        CharacterManager.Instance.Player.controller.moveSpeed += buffSpeed;
+        uiPassive.speedUp.uiBar.gameObject.SetActive(true);
+
+        for (float t = 0f; t < time; t += Time.deltaTime)
         {
-            // CharacterManager.Instance.Player.controller.moveSpeed += 
-
-            uiPassive.speedUp.uiBar.gameObject.SetActive(true);
-            speedUp.remainTime -= Time.deltaTime;
-
-            if (speedUp.remainTime == 0f)
-            {
-                uiPassive.speedUp.uiBar.gameObject.SetActive(false);
-            }
+            speedUp.uiBar.fillAmount = ( time - t ) / time;
+            yield return null;
         }
-        
-        if (jumpUp.remainTime > 0f)
+
+        CharacterManager.Instance.Player.controller.moveSpeed = curSpeed;
+        speedUp.uiBar.fillAmount = 0;
+        uiPassive.speedUp.uiBar.gameObject.SetActive(false);
+    }
+
+    public void JumpUpBuff(float time, float buffPower)
+    {
+        //jumpUp.AddBuff(value);
+        StartCoroutine(ApplyJumpUpBuff(time, buffPower));
+    }
+
+    private IEnumerator ApplyJumpUpBuff(float time, float buffPower)
+    {
+        float curPower = CharacterManager.Instance.Player.controller.jumpPower;
+        CharacterManager.Instance.Player.controller.jumpPower += buffPower;
+        uiPassive.jumpUp.uiBar.gameObject.SetActive(true);
+
+        for (float t = 0f; t < time; t += Time.deltaTime)
         {
-            uiPassive.jumpUp.uiBar.gameObject.SetActive(true);
-            jumpUp.remainTime -= Time.deltaTime;
-
-            if (jumpUp.remainTime == 0f)
-            {
-                uiPassive.jumpUp.uiBar.gameObject.SetActive(false);
-            }
+            jumpUp.uiBar.fillAmount = (time - t) / time;
+            yield return null;
         }
+
+        CharacterManager.Instance.Player.controller.jumpPower = curPower;
+        jumpUp.uiBar.fillAmount = 0;
+        uiPassive.jumpUp.uiBar.gameObject.SetActive(false);
     }
 }
