@@ -9,6 +9,7 @@ public class Passive : MonoBehaviour
     public float remainTime;
     public float buffTime;
     public Image uiBar;
+    public Image uiBG;
 
     private void Start()
     {

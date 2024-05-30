@@ -46,7 +46,7 @@ public class PlayerPassive : MonoBehaviour
     {
         float curSpeed = CharacterManager.Instance.Player.controller.moveSpeed;
         CharacterManager.Instance.Player.controller.moveSpeed += buffSpeed;
-        uiPassive.speedUp.uiBar.gameObject.SetActive(true);
+        uiPassive.speedUp.uiBG.gameObject.SetActive(true);
 
         for (float t = 0f; t < time; t += Time.deltaTime)
         {
@@ -56,7 +56,7 @@ public class PlayerPassive : MonoBehaviour
 
         CharacterManager.Instance.Player.controller.moveSpeed = curSpeed;
         speedUp.uiBar.fillAmount = 0;
-        uiPassive.speedUp.uiBar.gameObject.SetActive(false);
+        uiPassive.speedUp.uiBG.gameObject.SetActive(false);
     }
 
     public void JumpUpBuff(float time, float buffPower)
@@ -69,7 +69,7 @@ public class PlayerPassive : MonoBehaviour
     {
         float curPower = CharacterManager.Instance.Player.controller.jumpPower;
         CharacterManager.Instance.Player.controller.jumpPower += buffPower;
-        uiPassive.jumpUp.uiBar.gameObject.SetActive(true);
+        uiPassive.jumpUp.uiBG.gameObject.SetActive(true);
 
         for (float t = 0f; t < time; t += Time.deltaTime)
         {
@@ -79,6 +79,6 @@ public class PlayerPassive : MonoBehaviour
 
         CharacterManager.Instance.Player.controller.jumpPower = curPower;
         jumpUp.uiBar.fillAmount = 0;
-        uiPassive.jumpUp.uiBar.gameObject.SetActive(false);
+        uiPassive.jumpUp.uiBG.gameObject.SetActive(false);
     }
 }
